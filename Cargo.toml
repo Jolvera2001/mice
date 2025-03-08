@@ -2,13 +2,6 @@
 name = "mice"
 version = "0.1.0"
 edition = "2021"
-build = "build.rs"
 
 [dependencies]
-serde = "1.0.218"
-serde_json = "1.0.140"
-slint = "1.10.0"
-tokio = "1.43.0"
-
-[build-dependencies]
-slint-build = "1.1.0"
+iced = { version = "0.13.1", features = ["tokio"] }
