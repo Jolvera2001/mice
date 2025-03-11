@@ -49,7 +49,25 @@ impl App {
     }
 
     pub fn view(&self) -> Column<AppMessage> {
-        column![]
+        let messages = self.message_list
+        .iter()
+        .map(| item| {
+            row![
+                text(&item.content).size(16)
+            ]
+            .spacing(6)
+            .into()
+        }).collect::<Vec<_>>();
+
+        column![
+
+            row![
+                text_input("Type here...", &self.input_value)
+                    .on_input(AppMessage::TextBoxChanged),
+                button("Send").on_press(AppMessage::MessageSent)
+            ].spacing(10),
+            column(messages).spacing(10)
+        ]
     }
 
     pub fn update(&mut self, message: AppMessage) -> Task<AppMessage> {
