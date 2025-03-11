@@ -1,5 +1,7 @@
 use iced::widget::{button, column, row, text, text_input, Column};
 
+mod client;
+
 fn main() -> iced::Result {
     iced::run("Mice", App::update, App::view)
 }
