@@ -1,4 +1,4 @@
-use iced::widget::{button, column, row, text, text_editor, text_input, Column};
+use iced::widget::{button, column, row, text, text_input, Column};
 
 fn main() -> iced::Result {
     iced::run("Mice", App::update, App::view)

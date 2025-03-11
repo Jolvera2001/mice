@@ -4,4 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-iced = { version = "0.13.1", features = ["tokio"] }
+tonic = "0.12.3"
+prost = "0.13.5"
+prost-types = "0.13.5" 
+chrono = "0.4.40"
+uuid = { version = "1.15.1", features = [ "v4" ]}
+tokio = { version = "1.44.0", features = [ "full" ]}
+iced = { version = "0.13.1", features = [ "tokio" ] }
+
+[build-dependencies]
+tonic-build = "0.12.3"
