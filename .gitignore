@@ -1,0 +1,6 @@
+/dist/
+/target/
+/Cargo.lock
+tailwindcss-windows-x64.exe
+*.exe
+output.css

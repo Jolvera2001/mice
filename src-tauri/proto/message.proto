@@ -1,0 +1,35 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Mice_server";
+package message;
+
+service MessageService {
+  rpc ConnectRequest(Connect) returns (stream Message);
+  rpc BroadcastMessage(Message) returns (Close);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+}
+
+message Message {
+  string userId = 1;
+  string content = 2;
+  google.protobuf.Timestamp sent_date = 3;
+}
+
+message Connect {
+  User user = 1;
+  bool active = 2;
+}
+
+message Close {}
+
+// can be reused later
+//message Reply {
+//  string userId = 1;
+//  string content = 2;
+//  google.protobuf.Timestamp sent_date = 3;
+//}
