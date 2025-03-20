@@ -4,3 +4,5 @@
 tailwindcss-windows-x64.exe
 *.exe
 output.css
+
+/node_modules

@@ -66,7 +66,9 @@ pub fn App() -> View {
 
     view! {
         main(class="container") {
-            
+            div(class="bg-red-500 text-white font-bold rounded-lg p-4") {
+                p { "This should be styled with Tailwind, how does this work?" }
+            }
         }
     }
 }
