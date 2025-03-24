@@ -65,9 +65,19 @@ pub fn App() -> View {
     };
 
     view! {
-        main(class="container") {
-            div(class="bg-red-500 text-white font-bold rounded-lg p-4") {
-                p { "This should be styled with Tailwind, how does this work?" }
+        main(class="w-screen h-screen") {
+            div(class="flex flex-grow flex-col") {
+                div(class="flex flex-col flex-grow p-4") {
+
+                }
+                div(class="flex flex-row gap-4 p-4") {
+                    input(class="flex-grow p-2 border rounded") {
+
+                    }
+                    button(class="px-4 py-2 bg-blue-500 text-white rounded") {
+                        "Send"
+                    }
+                }
             }
         }
     }
