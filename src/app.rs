@@ -53,8 +53,7 @@ pub fn App() -> View {
         })
     };
 
-    let send_message = move |e:SubmitEvent| {
-        e.prevent_default();
+    let send_message = move |_| {
         spawn_local_scoped(async move {
             let args = serde_wasm_bindgen::to_value(&MsgArgs {
                 msg:  &msg.get_clone()
@@ -66,15 +65,21 @@ pub fn App() -> View {
 
     view! {
         main(class="w-screen h-screen") {
-            div(class="flex flex-grow flex-col") {
+            div(class="flex flex-grow flex-col h-full") {
                 div(class="flex flex-col flex-grow p-4") {
 
                 }
                 div(class="flex flex-row gap-4 p-4") {
-                    input(class="flex-grow p-2 border rounded") {
+                    input(
+                        class="flex-grow p-2 border rounded",
+                        bind:value=msg
+                    ) {
 
                     }
-                    button(class="px-4 py-2 bg-blue-500 text-white rounded") {
+                    button(
+                        class="px-4 py-2 bg-blue-500 text-white rounded",
+                        on:click=send_message
+                    ) {
                         "Send"
                     }
                 }
