@@ -7,7 +7,7 @@ mod proto_types;
 mod commands;
 
 use app_state::AppState;
-use commands::greet;
+use commands::{greet, send_message};
 use crate::handler_services::ChatClient;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -24,7 +24,7 @@ pub fn run() {
             Ok(())
         })
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![greet, send_message])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
