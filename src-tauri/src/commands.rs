@@ -35,7 +35,9 @@ pub async fn send_message(state: State<'_, Mutex<AppState>>, msg: &str) -> Resul
             .await
             .map_err(|e| e.to_string())?;
 
-        Ok( MessageWrapper {
+        println!("content: {}", msg.to_string());
+
+        Ok(MessageWrapper {
             user_id,
             content: msg.to_string(),
             sent_date: curr_date.map(|ts| ts.seconds)

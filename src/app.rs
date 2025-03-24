@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use sycamore::futures::spawn_local_scoped;
 use sycamore::prelude::*;
+use sycamore::web::rt::web_sys;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -23,11 +24,6 @@ pub struct MessageWrapper {
 }
 
 #[derive(Serialize, Deserialize)]
-struct GreetArgs<'a> {
-    name: &'a str,
-}
-
-#[derive(Serialize, Deserialize)]
 struct MsgArgs<'a> {
     msg: &'a str,
 }
@@ -47,18 +43,23 @@ pub fn App() -> View {
                 msg:  &msg.get_clone()
             })
             .unwrap();
-            let result =invoke("send_message", args).await;
 
-            if let Ok(message) = serde_wasm_bindgen::from_value::<MessageWrapper>(result) {
+            println!("Sending message");
+
+            let result = invoke("send_message", args).await;
+
+            if let Ok(message) = serde_wasm_bindgen::from_value::<MessageWrapper>(result.clone()) {
                 chat.update(|messages| {
                     messages.push(message);
                 });
             } else {
-                println!("Error processing message");
+                let error_msg = result.as_string().unwrap_or_else(|| "Unknown error".to_string());
+                web_sys::console::log_1(&format!("Error from invoke: {:?}", error_msg).into());
             }
+            
+            msg.set(String::new());
         });
 
-        msg.set(String::new());
     };
 
     view! {
